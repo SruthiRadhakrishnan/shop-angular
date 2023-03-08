@@ -1,0 +1,40 @@
+<mat-card
+  *ngIf="product"
+  class="p-6"
+  [ngClass]="{ 'text-center': !fullWidthMode }"
+>
+  <div [ngClass]="{ flex: fullWidthMode }">
+    <img
+      class="mb-1 mx-auto h-[200px]"
+      [ngClass]="{ 'h-[200px]': !fullWidthMode, 'h-[360px]': fullWidthMode }"
+      [src]="product.image"
+    />
+    <div
+      class="w-full"
+      [ngClass]="{ 'px-8 flex flex-col justify-between': fullWidthMode }"
+    >
+      <div>
+        <p class="truncate hover:whitespace-normal font-bold">
+          {{ product.title }}
+        </p>
+        <p *ngIf="fullWidthMode">{{ product.description }}</p>
+        <p>
+          Rating: {{ product.rating.rate }} ({{ product.rating.count }} ratings)
+        </p>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-red-400 font-bold">{{
+          product.price | currency : "EUR"
+        }}</span>
+        <button
+          mat-icon-button
+          matTooltip="Add to cart"
+          color="primary"
+          (click)="onAddToCart()"
+        >
+          <mat-icon>add_shopping_cart</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-card>
